@@ -1,0 +1,24 @@
+from aiogram.types import ReplyKeyboardRemove, \
+    ReplyKeyboardMarkup, KeyboardButton, \
+    InlineKeyboardMarkup, InlineKeyboardButton
+import data.data as data
+
+menu_button = KeyboardButton(text='Меню 🍣')
+start_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+
+start_kb.add(menu_button)
+
+category_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+
+for i in data.categories:
+    category_button = KeyboardButton(text=i)
+    category_kb.add(category_button)
+
+product_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+basket_show_button = KeyboardButton(text='Открыть корзину')
+product_kb.add(basket_show_button)
+
+basket_clear_button = KeyboardButton(text='Очистить корзину')
+product_kb.add(basket_clear_button)
+
+
