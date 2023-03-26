@@ -1,6 +1,9 @@
 from aiogram import types
 from utils.keyboard import *
-from .bot import bot
+from bot import bot
+
+with open('data/category.txt', 'r', encoding='utf-8') as category:
+    selected_category = category.read()
 
 img = types.InputFile("./img/menu.jpg")
 
@@ -14,7 +17,10 @@ def stringMap(first, array, last):
 def text(array):
     return "\n".join(array)
 
+
 def main(message):
+    global selected_category
+    selected_category = message.text
     return bot.send_photo(
         chat_id=message.chat.id,
 

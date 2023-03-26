@@ -1,6 +1,6 @@
 from aiogram import types
 from utils.keyboard import *
-from .bot import bot
+from bot import bot
 
 photo = types.InputFile("./img/fon.jpg")
 
