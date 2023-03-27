@@ -25,20 +25,21 @@ class UserOrder:
             return UserOrder.price
 
     def show_basket(self):
-        
+        UserOrder.basket_string = ''
         if self.basket != []:
             for product in self.basket:
                 UserOrder.basket_string += (
-                    f"-- {product['name']}: {product['price']} x{product['count']}\n"
+                    f"-- {product['name']}: {product['price']}₽ x{product['count']}\n"
                 )
 
-            return f" {UserOrder.basket_string} \n\n Всего: {UserOrder.calc_total_price(self)}"
+            return f" {UserOrder.basket_string} \n\n Всего: {UserOrder.calc_total_price(self)}₽"
         else:
             return "Ваша корзина пуста"
         
     def add_product(self, product, count):
         product['count'] = count or 1
         self.basket.append(product)
+       
 
 order = UserOrder(False, "", "", [])
 
