@@ -9,13 +9,14 @@ class UserOrder:
         self.basket = basket
 
     def clear_basket(self, product):
-        if product:
+        if product != 'all':
             del self.basket[self.basket.index(product)]
 
         else:
             self.basket = []
 
     def calc_total_price(self):
+        UserOrder.price = 0
         if self.basket == []:
             return 0
         else:
@@ -46,11 +47,6 @@ order = UserOrder(False, "", "", [])
 def text(array):
     return '\n'.join(array)
 
-def calcPrice(list):
-    price = 0
-    for element in list:
-        price += element['price']
-    return str(price)
 
 def stringMap(first, array, last):
 

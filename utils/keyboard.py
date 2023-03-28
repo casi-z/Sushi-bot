@@ -23,7 +23,3 @@ basket_add_kb.add(basket_clear_button)
 basket_back_button = KeyboardButton(text='Назад в меню')
 basket_add_kb.add(basket_back_button)
 
-order_button = InlineKeyboardButton('Оформить заказ')
-
-order_kb = InlineKeyboardMarkup()
-order_kb.add(order_button)

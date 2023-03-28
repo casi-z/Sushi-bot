@@ -16,9 +16,15 @@ def listen(array):
 
         words = []
 
+        content_types=[]
         for string in strings:
-            if string == '/':
-                commands.append(string)
+
+            if string[0] == '/':
+                commands.append(string[1:])
+
+            elif string[0] == '-':
+                content_types.append(string[1:])
+
             else:
                 words.append(string)
 
@@ -27,3 +33,6 @@ def listen(array):
 
         if words != []:
             dp.register_message_handler(function, text=words)
+
+        if content_types != []:
+            dp.register_message_handler(function, content_types=content_types)
