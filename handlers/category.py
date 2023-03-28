@@ -13,32 +13,31 @@ async def category(message: types.Message):
 
    
     for i in data.menu[message.text]:
-        # try:
-        #     img = open("./img/" + message.text + "/" + str((data.menu[message.text].index(i) + 1)) + ".jpg")
-        #     await bot.send_photo(
-        #         chat_id=message.chat.id,
-        #         photo=img,
-        #         caption=text([
-        #             i['name'],
-        #             '',
-        #             i['description'],
-        #             '',
-        #             'Цена: <b>'+str(i['price'])+'₽</b>',
-        #             '',
-        #             'Добавить в корзину:  /'+ str(data.menu[message.text].index(i) + 1)
-        #         ])
-        #     )
+        with open("./img/" + message.text + "/" + str((data.menu[message.text].index(i) + 1)) + ".jpg", 'rb') as img:
+            await bot.send_photo(
+                chat_id=message.chat.id,
+                photo=img,
+                caption=text([
+                    i['name'],
+                    '',
+                    i['description'],
+                    '',
+                    'Цена: <b>'+str(i['price'])+'₽</b>',
+                    '',
+                    'Добавить в корзину:  /'+ str(data.menu[message.text].index(i) + 1)
+                ])
+            )
 
-        # finally: img.close()
-        await message.answer(
-            text=text([
-                i['name'],
-                '',
-                i['description'],
-                '',
-                'Цена: <b>'+str(i['price'])+'₽</b>',
-                '',
-                'Добавить в корзину:  /'+ str(data.menu[message.text].index(i) + 1)
-            ])
-        )
+        
+        # await message.answer(
+        #     text=text([
+        #         i['name'],
+        #         '',
+        #         i['description'],
+        #         '',
+        #         'Цена: <b>'+str(i['price'])+'₽</b>',
+        #         '',
+        #         'Добавить в корзину:  /'+ str(data.menu[message.text].index(i) + 1)
+        #     ])
+        # )
             

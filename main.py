@@ -3,13 +3,17 @@ from aiogram import types, executor
 from handlers import *
 import data.data as data
 from utils import calc_coords
+from data.global_vars import order
+import time
+
 
 def category_get():
     with open('data/category.txt', 'r', encoding='utf-8') as category:
         return str(category.read())
 
 
-
+# Функция listen заменяет тонны хендлеров
+# Вся логика раскидана по файлам
 listen([
     [['/start', '/bar'], start.start],
     [['/menu', 'Меню 🍣', 'Назад в меню'], menu.menu],
@@ -25,7 +29,11 @@ listen([
         basket_clear.basket_remove
     ],
     [['Оформить заказ'], make_order.make_order],
+    [['Отменить заказ'], make_order.make_order],
     [['-location'], read_geolocation.read_geolocation],
+    [['Перейти к оплате'], pay.set_pay_method],
+    [['Использовать промокод'], pay.set_promocode],
+    [['Оплата картой', 'Оплатить картой'], pay.main],
 ])
 
 

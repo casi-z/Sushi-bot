@@ -2,6 +2,7 @@ from aiogram import types
 from utils.keyboard import *
 from bot import bot
 from utils import stringMap
+from data.global_vars import order
 
 
 with open('data/category.txt', 'r', encoding='utf-8') as category:
@@ -13,6 +14,7 @@ async def menu(message):
     
     global selected_category
     selected_category = message.text
+    
     with open("img/menu.jpg", 'rb') as img:
         await bot.send_photo(
             chat_id=message.chat.id,

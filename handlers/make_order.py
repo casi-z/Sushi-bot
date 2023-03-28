@@ -1,5 +1,7 @@
 from aiogram.types import *
 from bot import dp
+from data.global_vars import order
+
 rest_button = KeyboardButton('Заказать в ресторан')
 home_button = KeyboardButton('Заказать на дом')
 deny_order_button = KeyboardButton('Отменить заказ')
@@ -15,6 +17,7 @@ get_geolocation_kb.add(send_geolocation_button)
 get_geolocation_kb.add(deny_order_button)
 
 
+
 async def make_order(message):
     await message.answer(
         text='Вы хотите покушать в ресторане или у себя дома?',
@@ -22,10 +25,17 @@ async def make_order(message):
     )
     @dp.message_handler(text=['Заказать в ресторан', 'Заказать на дом'])
     async def get_geolocation(message):
-        
+
+        if message.text == 'Заказать на дом':
+            order.set_delivery(True)
+        else: 
+            order.set_delivery(False)
+
         await message.answer(
             text='Отправьте своё местоположение для заказа!',
             reply_markup = get_geolocation_kb,
         )
     
-    
+async def deny_order(message):
+    order.basket_clear()
+    await message.answer('Заказ отменён')

@@ -1,13 +1,13 @@
 class UserOrder:
     price = 0
     basket_string = ""
-
+    delivery_price = 0
     def __init__(self, delivery, address, phone, basket):
         self.delivery = delivery
         self.address = address
         self.phone = phone
         self.basket = basket
-
+        
     def clear_basket(self, product):
         if product != 'all':
             del self.basket[self.basket.index(product)]
@@ -21,7 +21,7 @@ class UserOrder:
             return 0
         else:
             for product in self.basket:
-                UserOrder.price += product["price"] * product["count"]
+                UserOrder.price += (product["price"] * product["count"]) + self.delivery_price
 
             return UserOrder.price
 
@@ -39,10 +39,19 @@ class UserOrder:
         
     def add_product(self, product, count):
         product['count'] = count or 1
-        self.basket.append(product)
-       
 
-order = UserOrder(False, "", "", [])
+        if product in self.basket:
+            self.basket[self.basket.index(product)]['count'] += 1
+        else:
+            self.basket.append(product)
+       
+    def set_delivery(self, item):
+        self.delivery = item
+
+    def set_delivery_price(self, item):
+        self.delivery_price = item
+        
+order = UserOrder(True, "", "", [])
 
 def text(array):
     return '\n'.join(array)

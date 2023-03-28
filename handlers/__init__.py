@@ -6,3 +6,4 @@ from handlers import menu
 from handlers import start
 from handlers import make_order
 from handlers import read_geolocation
+from handlers import pay
